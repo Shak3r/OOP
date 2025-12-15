@@ -1,0 +1,21 @@
+PDV_RATE = 0.2
+
+def calculate_total(prices, with_tax):
+    """Розраховує суму замовлення з ПДВ або без"""
+    total = sum(prices)
+
+    if with_tax:
+        total = total * (1 + PDV_RATE)
+
+    return total
+
+
+def calculate_total_with_discount(prices, with_tax, discount):
+    """Розраховує суму замовлення зі знижкою"""
+    if discount < 0 or discount > 1:
+        return None
+
+    total = calculate_total(prices, with_tax)
+    total = total * (1 - discount)
+
+    return total
