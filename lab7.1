@@ -1,0 +1,39 @@
+class Account:
+    def __init__(self, owner, balance=0, history=None):
+        self._owner = owner
+        self._balance = balance
+        self._history = history if history is not None else []
+
+    def get_owner(self):
+        return self._owner
+
+    def get_balance(self):
+        return self._balance
+
+    def deposit(self, amount):
+        """Поповнення рахунку"""
+        if amount <= 0:
+            return False
+
+        self._balance += amount
+        self._history.append(f"Поповнення: +{amount}")
+        return True
+
+    def withdraw(self, amount):
+        """Зняття коштів"""
+        if amount <= 0:
+            return False
+
+        if self._balance < amount:
+            return False
+
+        self._balance -= amount
+        self._history.append(f"Зняття: -{amount}")
+        return True
+
+    def print_history(self):
+        for item in self._history:
+            print(item)
+
+    def print_info(self):
+        print(f"Власник: {self._owner}, Баланс: {self._balance}")
