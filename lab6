@@ -1,0 +1,54 @@
+from abc import ABC, abstractmethod
+
+
+class NotificationSender(ABC):
+    @abstractmethod
+    def connect(self) -> bool:
+        pass
+
+    @abstractmethod
+    def send(self, recipient: str, message: str) -> bool:
+        pass
+
+    @abstractmethod
+    def disconnect(self):
+        pass
+
+
+class EmailSender(NotificationSender):
+    def connect(self) -> bool:
+        print("Email: підключено")
+        return True
+
+    def send(self, recipient: str, message: str) -> bool:
+        print(f"Email -> {recipient}: {message}")
+        return True
+
+    def disconnect(self):
+        print("Email: відключено")
+
+
+class SMSSender(NotificationSender):
+    def connect(self) -> bool:
+        print("SMS: підключено")
+        return True
+
+    def send(self, recipient: str, message: str) -> bool:
+        print(f"SMS -> {recipient}: {message}")
+        return True
+
+    def disconnect(self):
+        print("SMS: відключено")
+
+
+class TelegramSender(NotificationSender):
+    def connect(self) -> bool:
+        print("Telegram: підключено")
+        return True
+
+    def send(self, recipient: str, message: str) -> bool:
+        print(f"Telegram -> {recipient}: {message}")
+        return True
+
+    def disconnect(self):
+        print("Telegram: відключено")
