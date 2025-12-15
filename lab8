@@ -1,0 +1,48 @@
+class Hero:
+    def __init__(self, name, health=100, mana=50, gold=100):
+        self.name = name
+        self.health = health
+        self.mana = mana
+        self.gold = gold
+        self.inventory = []
+
+    def cast_spell(self, spell_name, mana_cost):
+        """Використовує закляття, витрачаючи ману"""
+        if mana_cost > self.mana:
+            print(f"{self.name} не може використати {spell_name}: недостатньо мани ({self.mana}/{mana_cost})")
+            return 0
+
+        self.mana = self.mana - mana_cost
+        damage = mana_cost * 2
+        print(f"{self.name} використав {spell_name}, завдав {damage} шкоди!")
+        return damage
+
+    def remove_from_inventory(self, item):
+        """Видаляє предмет з інвентарю"""
+        try:
+            self.inventory.remove(item)
+            print(f"Видалено '{item}' з інвентарю")
+        except ValueError:
+            print(f"Неможливо видалити '{item}': такого предмета немає в інвентарі")
+
+    def get_item_at_index(self, index):
+        """Повертає предмет за індексом"""
+        try:
+            return self.inventory[index]
+        except IndexError:
+            print(f"Неправильний індекс {index}: предмета не існує")
+            return None
+
+    def divide_gold(self, num_players):
+        """Ділить золото між гравцями"""
+        try:
+            share = self.gold / num_players
+            print(f"Кожен гравець отримає {share} золота")
+            return share
+        except ZeroDivisionError:
+            print("Неможливо поділити золото: кількість гравців не може бути 0")
+            return None
+
+    def status(self):
+        print(f"Герой: {self.name} | HP: {self.health} | Мана: {self.mana} | Золото: {self.gold}")
+        print(f"Інвентар: {self.inventory}")
